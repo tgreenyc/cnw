@@ -1,7 +1,0 @@
----
-applications:
-- name: hello-spring-boot
-  memory: 512M
-  instances: 1
-  host: hello-spring-boot-${random-word}
-  path: ./target/hello-spring-boot-0.0.1-SNAPSHOT.jar
