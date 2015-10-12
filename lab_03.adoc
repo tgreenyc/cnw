@@ -1,0 +1,205 @@
+:compat-mode:
+= Lab 3 - Creating a guestbook application that persist data.
+
+In this lab we're going to build a Guestbook application that allows the user to enter information in the U/I.
+The resulting application looks like the following screenshot:
+
+== Bootstrapping
+
+. Choose *File -> Import*:
++
+image::Common/images/sts_guestbook_1.png[width=50%]
+
+. Choose *Maven -> Existing Maven Projects*:
++
+image::Common/images/sts_guestbook_2.png[width=50%]
+. Choose the project's `pom.xml`, found at `$COURSE_HOME/labs/initial/guestbook` and click *Finish*.
++
+image::Common/images/sts_guestbook_3.png[width=50%]
+
+
+== Create the JPA domain class
+
+All guestbook entries will be stored in a database.
+
+. Create a JPA domain class, `io.spring.cloud.samples.guestbook.domain.Message`.
+Into that class, paste the following code:
++
+----
+@Entity
+@Table(name = "Message")
+public class Message implements Serializable {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+
+
+  @Column(nullable = false)
+  private String name;
+
+  @Column(nullable = false, length = 1024)
+  private String message;
+
+  private Date created;
+  
+  private String fortune;
+
+  protected Message(){
+	    this.created = new Date();
+  }
+
+  public Message(String name, String message) {
+    this.name = name;
+    this.message = message;
+    this.created = new Date();
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+  
+  public String getFortune() {
+	  return fortune;
+  }
+
+  public void setFortune(String fortune) {
+	  this.fortune = fortune;
+  }
+  
+  @JsonSerialize(using=JsonDateSerializer.class)
+  public Date getCreated() {
+    return created;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("Message{");
+    sb.append("id=").append(id);
+    sb.append(", name='").append(name).append('\'');
+    sb.append(", message='").append(message).append('\'');
+    sb.append(", created=").append(created);
+    sb.append('}');
+    return sb.toString();
+  }
+}
+----
++
+Add the appropriate imports using the IDE's quick fix feature.
++
+This class represents the domain model for a fortune, having an unique identifier and the fortune's text.
+
+. Next, create the package `io.spring.cloud.samples.guestbook.repositories`.
+
+. Create a Spring Data JPA repository interface, `io.spring.cloud.samples.guestbook.repositories.MessageRepository`.
+Into that class, paste the following code:
++
+----
+public interface MessageRepository extends CrudRepository<Message, Long> {
+
+}
+----
++
+Add the appropriate imports using the IDE's quick fix feature.
++
+This interface will provide all of the basic boilerplate CRUD features we'll want for our `Message` domain class.
+
+== Guestbook Controller
+
+Next we’ll create a Spring MVC Controller that will be responsible for displaying and updating the guestbook.
+
+. Create the Guestbook controller class, `io.spring.cloud.samples.guestbook.controller.GuestbookController`.
+Into that class, paste the following code:
++
+----
+@Controller
+@RequestMapping(value = "/message/**", produces = "application/json")
+public class GuestbookController {
+  public static final Logger LOGGER = Logger.getLogger(GuestbookController.class.getName());
+
+  @Autowired
+  private MessageRepository messageRepository;
+
+  @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+  @ResponseBody
+  public List<Message> getAllMessages() {
+    LOGGER.info("message repo is: " + messageRepository);
+    List<Message> messages = new LinkedList<>();
+    Iterable<Message> messageIterable = messageRepository.findAll();
+    for (Message message : messageIterable) {
+      messages.add(message);
+    }
+    return messages;
+  }
+
+  @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+  @ResponseBody
+  public Message putMessage(@RequestBody Message message) {
+    LOGGER.info("message repo is: " + messageRepository);
+
+    return messageRepository.save(message);
+  }
+}
+
+----
++
+Add the appropriate imports using the IDE's quick fix feature.
++
+This class represents the controller for the guestbook.
+
+== Running the application
+
+. Right click on `io.spring.cloud.samples.guestbook.GuestbookApplication` and choose *Run As -> Spring Boot App*:
++
+image::Common/images/sts_run_as_boot_guestbook.png[width=50%]
+
+. Browse to http://localhost:8080.
+You should see output similar to the following:
++
+image::Common/images/Guestbook.png[width=50%]
+
+== Build and Push!
+
+. Change to the _Guestbook_ sample application directory:
++
+----
+$ cd $COURSE_HOME/labs/initial/guestbook
+----
+
+. Using Maven, build and package the application:
++
+----
+$ mvn package
+----
++
+Maven will automatically download all of _Guestbook_’s dependencies. This may take a few moments.
+
+. Push the application!
++
+----
+$ cf push
+----
++
+
+. Visit the application in your browser by hitting the route that was generated by the CLI:
+
++
+image::Common/images/Guestbook.png[]
+
+

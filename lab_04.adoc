@@ -1,0 +1,5 @@
+:compat-mode:
+= Lab 4 - Binding to Cloud Foundry Services
+
+[abstract]
+--

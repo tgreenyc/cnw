@@ -1,0 +1,20 @@
+spring:
+  application:
+   name: guestbook
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+---
+
+spring:
+  profiles: default
+  jpa:
+    database: HSQL
+
+---
+
+spring:
+  profiles: cloud
+  jpa:
+    database: POSTGRESQL
