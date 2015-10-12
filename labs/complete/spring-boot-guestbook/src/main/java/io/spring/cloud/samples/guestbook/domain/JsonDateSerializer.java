@@ -1,4 +1,4 @@
-package io.pivotal.fe.demo.guestbook.domain;
+package io.spring.cloud.samples.guestbook.domain;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

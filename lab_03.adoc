@@ -172,7 +172,7 @@ image::Common/images/sts_run_as_boot_guestbook.png[width=50%]
 . Browse to http://localhost:8080.
 You should see output similar to the following:
 +
-image::Common/images/Guestbook.png[width=50%]
+image::Common/images/Guestbook_local.png[]
 
 == Build and Push!
 

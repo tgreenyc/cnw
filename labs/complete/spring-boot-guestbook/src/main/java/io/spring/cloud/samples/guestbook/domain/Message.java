@@ -1,5 +1,4 @@
-package io.pivotal.fe.demo.guestbook.domain;
-
+package io.spring.cloud.samples.guestbook.domain;
 
 import javax.persistence.*;
 
@@ -8,15 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author sgupta
- * @since 9/22/15.
- */
 @Entity
 @Table(name = "Message")
 public class Message implements Serializable {
-
-  private static final long serialVersionUID = -4291753241578387042L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +23,7 @@ public class Message implements Serializable {
   private String message;
 
   private Date created;
-  
+
   private String fortune;
 
   protected Message(){
@@ -62,7 +55,7 @@ public class Message implements Serializable {
   public void setMessage(String message) {
     this.message = message;
   }
-  
+
   public String getFortune() {
 	  return fortune;
   }
@@ -70,7 +63,7 @@ public class Message implements Serializable {
   public void setFortune(String fortune) {
 	  this.fortune = fortune;
   }
-  
+
   @JsonSerialize(using=JsonDateSerializer.class)
   public Date getCreated() {
     return created;

@@ -1,7 +1,7 @@
-package io.pivotal.fe.demo.guestbook.controller;
+package io.spring.cloud.samples.guestbook.controller;
 
-import io.pivotal.fe.demo.guestbook.domain.Message;
-import io.pivotal.fe.demo.guestbook.service.MessageRepository;
+import io.spring.cloud.samples.guestbook.domain.Message;
+import io.spring.cloud.samples.guestbook.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * @author sgupta
- * @since 9/22/15.
- */
 @Controller
 @RequestMapping(value = "/message/**", produces = "application/json")
 public class GuestbookController {
@@ -24,7 +20,6 @@ public class GuestbookController {
 
   @Autowired
   private MessageRepository messageRepository;
-
 
   @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
   @ResponseBody
@@ -38,15 +33,13 @@ public class GuestbookController {
     return messages;
   }
 
-
   @RequestMapping(method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public Message putMessage(@RequestBody Message message) {
     LOGGER.info("message repo is: " + messageRepository);
+    
+    LOGGER.info("message =: " + message);
 
     return messageRepository.save(message);
   }
-
-
-
 }
