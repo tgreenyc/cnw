@@ -1,0 +1,84 @@
+:compat-mode:
+= Lab 8 - Push Microservices to Cloud Foundry
+
+== Build and Push!
+
+. Return to the _Fortune Teller_ application directory that you finished in link:lab_07.html[Lab 7]:
++
+----
+$ cd $COURSE_HOME/labs/initial/fortune-teller
+----
+
+. Using Maven, build and package the application:
++
+----
+$ mvn package
+----
++
+Maven will automatically download all of _Fortune Teller_'s dependencies. This may take a few moments.
+
+. Run `scripts/create_services.sh` to create the services that you need:
++
+----
+$ scripts/create_services.sh
+Creating service instance config-service in org org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance service-registry in org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance circuit-breaker in org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance fortune-db in org org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+----
+
+. In your PWS Space Dashboard, click *Manage* for your Config Server instance:
++
+image:Common/images/space_dashboard.png[]
+
+. In the resulting Config Server Dashboard, ensure that *Git* is selected, paste `https://github.com/mstine/config-repo.git` into the *Git URI* field, and click *Submit*:
++
+image:Common/images/config_server_dashboard.png[]
+
+. Push the microservices:
++
+----
+$ cf push -f manifest-apps.yml
+----
++
+This will push the fortunes service and the ui application.
+
+. In a browser, access the fortunes-ui application at the route that was created for you:
++
+image:Common/images/fortunes_1.png[]
+
+. In your PWS Space Dashboard, click *Manage* for your Circuit Breaker Dashboard instance:
++
+image:Common/images/space_dashboard_2.png[]
+
+. Access the fortunes-ui and show that the circuit breaker is registering successful requests.
++
+image:Common/images/pcf_circuit_breaker_1.png[]
+
+. Stop the fortunes application:
++
+----
+$ cf stop fortunes
+----
+
+. Access the fortunes-ui and see that the ``fallback fortune'' is being returned.
++
+image:Common/images/fortunes_4.png[]
+
+. Access the fortunes-ui and show that the circuit breaker is registering short-circuited requests.
++
+image:Common/images/pcf_circuit_breaker_2.png[]
+
+. Start the fortunes application:
++
+----
+$ cf start fortunes
+----
+
+. Continue to access the fortunes-ui and watch the dashboard.
+After the fortunes service has re-registered with Eureka and the fortunes-ui load balancer caches are refreshed, you will see the circuit breaker recover.
+You should then start getting random fortunes again!

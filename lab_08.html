@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Cloud Native Workshop</title>
+<title>Lab 8 - Push Microservices to Cloud Foundry</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -411,188 +411,131 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Cloud Native Workshop</h1>
+<h1>Lab 8 - Push Microservices to Cloud Foundry</h1>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Student Guide</p>
-</div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_instructor_details">Instructor Details</h2>
+<h2 id="_build_and_push">Build and Push!</h2>
 <div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Return to the <em>Fortune Teller</em> application directory that you finished in <a href="lab_07.html">Lab 7</a>:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ cd $COURSE_HOME/labs/initial/fortune-teller</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using Maven, build and package the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ mvn package</pre>
+</div>
+</div>
 <div class="paragraph">
-<p>…</p>
+<p>Maven will automatically download all of <em>Fortune Teller</em>'s dependencies. This may take a few moments.</p>
+</div>
+</li>
+<li>
+<p>Run <code>scripts/create_services.sh</code> to create the services that you need:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ scripts/create_services.sh
+Creating service instance config-service in org org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance service-registry in org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance circuit-breaker in org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK
+Creating service instance fortune-db in org org platform-eng / space nfjs-workshop as mstine@pivotal.io...
+OK</pre>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_schedule">Schedule</h2>
-<div class="sectionbody">
+</li>
+<li>
+<p>In your PWS Space Dashboard, click <strong>Manage</strong> for your Config Server instance:</p>
 <div class="paragraph">
-<p><em>This is a <strong>loose</strong> schedule for the day to give us some structure.
-We will adjust as necessary based on our flow through the content.
-Our only fixed break is lunch.</em></p>
+<p><span class="image"><img src="Common/images/space_dashboard.png" alt="space_dashboard"></span></p>
 </div>
-<div class="dlist">
-<div class="title">Day 1</div>
-<dl>
-<dt class="hdlist1">9:00 AM - 10:00 AM</dt>
-<dd>
-<p><strong>Session 1</strong>: <em>Concepts and Overview</em></p>
-</dd>
-<dt class="hdlist1">10:00 AM - 10:15 AM</dt>
-<dd>
-<p>Morning Brain Break</p>
-</dd>
-<dt class="hdlist1">10:15 AM - 12:00 PM</dt>
-<dd>
-<p><strong>Session 2</strong>: <em>Intro to Spring Boot</em></p>
-</dd>
-<dt class="hdlist1">12:00 PM - 1:00 PM</dt>
-<dd>
-<p>Lunch</p>
-</dd>
-<dt class="hdlist1">1:00 PM - 2:00 PM</dt>
-<dd>
-<p><strong>Session 3</strong>: <em>Intro to PCF</em></p>
-</dd>
-<dt class="hdlist1">2:00 PM - 2:15 PM</dt>
-<dd>
-<p>Afternoon Brain Break</p>
-</dd>
-<dt class="hdlist1">2:15 PM - 4:15 PM</dt>
-<dd>
-<p><strong>Session 4</strong>: <em>App with Services</em></p>
-</dd>
-<dt class="hdlist1">4:15 PM - 5:00 PM</dt>
-<dd>
-<p><strong>Session 5</strong>: <em>PCF Concepts</em></p>
-</dd>
-</dl>
-</div>
-<div class="dlist">
-<div class="title">Day 2</div>
-<dl>
-<dt class="hdlist1">9:00 AM - 10:00 AM</dt>
-<dd>
-<p><strong>Session 6</strong>: <em>Microservices</em></p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_first_things_first">First Things First</h2>
-<div class="sectionbody">
+</li>
+<li>
+<p>In the resulting Config Server Dashboard, ensure that <strong>Git</strong> is selected, paste <code>https://github.com/mstine/config-repo.git</code> into the <strong>Git URI</strong> field, and click <strong>Submit</strong>:</p>
 <div class="paragraph">
-<p>To be successful, you&#8217;ll need certain prerequisite tools installed on the laptops that you&#8217;ll be bringing to the session:</p>
+<p><span class="image"><img src="Common/images/config_server_dashboard.png" alt="config_server_dashboard"></span></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java 8 JDK</a> (not just JRE)</p>
 </li>
 <li>
-<p><a href="https://maven.apache.org/download.cgi">Apache Maven</a> (latest)</p>
-</li>
-<li>
-<p><a href="http://curl.haxx.se/download.html">cURL</a> (latest)</p>
-</li>
-<li>
-<p><a href="https://git-scm.com/downloads">Git</a> (latest)</p>
-</li>
-<li>
-<p><a href="https://github.com/cloudfoundry/cli/releases">Cloud Foundry Client</a> (latest)</p>
-</li>
-<li>
-<p><a href="https://spring.io/tools">Spring Tool Suite</a> (latest)</p>
-</li>
-</ul>
+<p>Push the microservices:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ cf push -f manifest-apps.yml</pre>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_course_materials">Course Materials</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Change to fit the CNW stuff…</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Session 1 (<a href="session_01.pdf">Slides</a>)</p>
-</li>
-<li>
-<p>Session 2 (<a href="session_02.pdf">Slides</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="lab_01.html">Lab 1 - Getting Started with Spring Boot</a></p>
-</li>
-</ul>
+<p>This will push the fortunes service and the ui application.</p>
 </div>
 </li>
 <li>
-<p>Session 3 (<a href="session_03.pdf">Slides</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="lab_02.html">Lab 2 - From Zero to Pushing Your First Application</a></p>
-</li>
-</ul>
+<p>In a browser, access the fortunes-ui application at the route that was created for you:</p>
+<div class="paragraph">
+<p><span class="image"><img src="Common/images/fortunes_1.png" alt="fortunes_1"></span></p>
 </div>
 </li>
 <li>
-<p>Session 4 (<a href="session_04.pdf">Slides</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="lab_03.html">Lab 3 - Creating a guestbook application that persist data</a></p>
-</li>
-<li>
-<p><a href="lab_04.html">Lab 4 - Binding to Cloud Foundry Services</a></p>
-</li>
-</ul>
+<p>In your PWS Space Dashboard, click <strong>Manage</strong> for your Circuit Breaker Dashboard instance:</p>
+<div class="paragraph">
+<p><span class="image"><img src="Common/images/space_dashboard_2.png" alt="space_dashboard_2"></span></p>
 </div>
 </li>
 <li>
-<p>Session 5 (<a href="session_05.pdf">Slides</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="lab_05.html">Lab 5 - Scaling Applications</a></p>
-</li>
-<li>
-<p><a href="lab_06.html">Lab 6 - Monitoring</a></p>
-</li>
-</ul>
+<p>Access the fortunes-ui and show that the circuit breaker is registering successful requests.</p>
+<div class="paragraph">
+<p><span class="image"><img src="Common/images/pcf_circuit_breaker_1.png" alt="pcf_circuit_breaker_1"></span></p>
 </div>
 </li>
 <li>
-<p>Session 6 (<a href="session_06.pdf">Slides</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="lab_07.html">Lab 7 - Composing Microservices with Spring Cloud and Netflix OSS</a></p>
-</li>
-<li>
-<p><a href="lab_08.html">Lab 8 - Push Microservices to Cloud Foundry</a></p>
-</li>
-</ul>
+<p>Stop the fortunes application:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ cf stop fortunes</pre>
+</div>
 </div>
 </li>
-</ul>
+<li>
+<p>Access the fortunes-ui and see that the &#8220;fallback fortune&#8221; is being returned.</p>
+<div class="paragraph">
+<p><span class="image"><img src="Common/images/fortunes_4.png" alt="fortunes_4"></span></p>
+</div>
+</li>
+<li>
+<p>Access the fortunes-ui and show that the circuit breaker is registering short-circuited requests.</p>
+<div class="paragraph">
+<p><span class="image"><img src="Common/images/pcf_circuit_breaker_2.png" alt="pcf_circuit_breaker_2"></span></p>
+</div>
+</li>
+<li>
+<p>Start the fortunes application:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ cf start fortunes</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Continue to access the fortunes-ui and watch the dashboard.
+After the fortunes service has re-registered with Eureka and the fortunes-ui load balancer caches are refreshed, you will see the circuit breaker recover.
+You should then start getting random fortunes again!</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-13 11:16:15 EDT
+Last updated 2015-10-13 11:00:26 EDT
 </div>
 </div>
 </body>
