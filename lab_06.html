@@ -679,7 +679,7 @@ To meet these needs, Cloud Foundry provides the ability to <a href="http://docs.
 </div>
 </li>
 <li>
-<p>Click on &#8220;Alternatives&#8221;:</p>
+<p>Click on ``Heroku’’:</p>
 <div class="imageblock">
 <div class="content">
 <img src="Common/images/papertrail_2.png" alt="papertrail 2">
@@ -706,20 +706,20 @@ To meet these needs, Cloud Foundry provides the ability to <a href="http://docs.
 <p>We&#8217;ll use a Cloud Foundry <a href="http://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a> to create the log drain for our application using the URL + Port provided by Papertrail:</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ cf cups cf-scale-boot-logs -l syslog://logs2.papertrailapp.com:43882
-Creating user provided service cf-scale-boot-logs in org oreilly-class / space instructor as mstine@pivotal.io...
+<pre>$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:36251
+Creating user provided service guestbook-logs in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
 OK</pre>
 </div>
 </div>
 </li>
 <li>
-<p>We bind that service instance like those we created in <a href="lab_02.html">Lab 2</a>:</p>
+<p>We bind that service instance:</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ cf bs cf-scale-boot cf-scale-boot-logs
-Binding service cf-scale-boot-logs to app cf-scale-boot in org oreilly-class / space instructor as mstine@pivotal.io...
+<pre>$ cf bs guestbook guestbook-logs
+Binding service guestbook-logs to app guestbook in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
 OK
-TIP: Use 'cf restage' to ensure your env variable changes take effect</pre>
+TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect</pre>
 </div>
 </div>
 </li>
@@ -727,7 +727,7 @@ TIP: Use 'cf restage' to ensure your env variable changes take effect</pre>
 <p>We&#8217;ll use a <code>cf restart</code> rather than <code>cf restage</code> to make the binding take effect:</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ cf restart cf-scale-boot</pre>
+<pre>$ cf restart guestbook</pre>
 </div>
 </div>
 </li>
@@ -861,7 +861,7 @@ time                          event                 actor                  descr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-13 10:34:29 EDT
+Last updated 2015-10-13 10:56:13 EDT
 </div>
 </div>
 </body>
