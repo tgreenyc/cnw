@@ -51,6 +51,7 @@ Change to fit the CNW stuff…
 ** link:lab_04.html[Lab 4 - Binding to Cloud Foundry Services]
 * Session 5 (link:session_05.pdf[Slides])
 ** link:lab_05.html[Lab 5 - Scaling Applications]
+** link:lab_06.html[Lab 6 - Monitoring]
 
 
 
