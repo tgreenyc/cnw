@@ -51,7 +51,7 @@ Change to fit the CNW stuff…
 ** link:lab_04.html[Lab 4 - Binding to Cloud Foundry Services]
 * Session 5 (link:session_05.pdf[Slides])
 ** link:lab_05.html[Lab 5 - Scaling Applications]
-** link:lab_06.html[Lab 6 - Monitoring]
+** link:lab_06.html[Lab 6 - Monitoring, Logging and Health]
 * Session 6 (link:session_06.pdf[Slides])
 ** link:lab_07.html[Lab 7 - Composing Microservices with Spring Cloud and Netflix OSS]
 ** link:lab_08.html[Lab 8 - Push Microservices to Cloud Foundry]

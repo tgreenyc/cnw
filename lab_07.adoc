@@ -40,13 +40,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/mstine/config-repo.git
+          uri: https://github.com/jaimegag/config-repo.git
 ----
 +
-These properties tell the Config Server to listen on port `8888` and to source its configuration from the Git repository found at https://github.com/mstine/config-repo.
-
-. Browse the file https://github.com/mstine/config-repo/blob/master/application.yml#L1-L18.
-These lines tell all applications using the `cloud` Spring profile how to connect to and register themselves with Eureka.
+These properties tell the Config Server to listen on port `8888` and to source its configuration from the Git repository found at https://github.com/jaimegag/config-repo.
 
 . Right click on `io.spring.cloud.samples.fortuneteller.configserver.Application` and choose *Run As -> Spring Boot App*:
 +
