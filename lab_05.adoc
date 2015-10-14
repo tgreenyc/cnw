@@ -1,5 +1,5 @@
 :compat-mode:
-= Lab 5 - Scaling, Logging and Health
+= Lab 5 - Scaling Applications
 
 [abstract]
 --

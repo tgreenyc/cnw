@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Lab 2 - From Zero to Pushing Your First Application</title>
+<title>Lab 9 -</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -411,204 +411,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Lab 2 - From Zero to Pushing Your First Application</h1>
+<h1>Lab 9 -</h1>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_target">Target</h2>
+<h2 id="_">??</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>If you haven&#8217;t already, download the latest release of the Cloud Foundry CLI from <a href="https://github.com/cloudfoundry/cli/releases" class="bare">https://github.com/cloudfoundry/cli/releases</a> for your operating system and install it.</p>
-</li>
-<li>
-<p>Set the API target for the CLI:</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ cf api api.run.pivotal.io</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Login to Pivotal Web Services:</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ cf login</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Follow the prompts.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_build_and_push">Build and Push!</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Change to the <em>Hello World</em> sample application directory:</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ cd $COURSE_HOME/labs/initial/hello-spring-boot</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create manifest file that defines how the application should be pushed to PWS.  In the <code>$COURSE_HOME/labs/initial/hello-spring-boot</code> directory create a file called <code>manifest.yml</code>.</p>
-<div class="paragraph">
-<p>Into that file, paste the following configuration properties:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>---
-applications:
-- name: hello-spring-boot
-  memory: 512M
-  instances: 1
-  host: hello-spring-boot-${random-word}
-  path: ./target/hello-spring-boot-0.0.1-SNAPSHOT.jar</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Visit <a href="http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/manifest.html" class="bare">http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/manifest.html</a> to learn more about deploying with application manifests.</p>
-</div>
-</li>
-<li>
-<p>Using Maven, build and package the application:</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ mvn package</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Maven will automatically download all of <em>Hello World</em>’s dependencies. This may take a few moments.</p>
-</div>
-</li>
-<li>
-<p>Push the application!</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ cf push</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should see output similar to the following listing. Take a look at the listing callouts for a play-by-play of what&#8217;s happening:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>Using manifest file /Users/cdecelles/GitHub/cjd-cnw/labs/initial/hello-spring-boot/manifest.yml<b class="conum">(1)</b>
 
-Creating app hello-spring-boot in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
-OK<b class="conum">(2)</b>
-
-Creating route hello-spring-boot-structural-obstructionist.cfapps.io...
-OK<b class="conum">(3)</b>
-
-Binding hello-spring-boot-structural-obstructionist.cfapps.io to hello-spring-boot...
-OK<b class="conum">(4)</b>
-
-Uploading hello-spring-boot…<b class="conum">(5)</b>
-Uploading app files from: /Users/cdecelles/GitHub/cjd-cnw/labs/initial/hello-spring-boot/target/hello-spring-boot-0.0.1-SNAPSHOT.jar
-Uploading 525K, 89 files
-Done uploading
-OK
-
-Starting app hello-spring-boot in org Northeast / Canada / space cjd as cdecelles@pivotal.io…<b class="conum">(6)</b>
------&gt; Downloaded app package (11M)
------&gt; Java Buildpack Version: v3.2 | https://github.com/cloudfoundry/java-buildpack.git#3b68024
------&gt; Downloading Open Jdk JRE 1.8.0_60 from https://download.run.pivotal.io/openjdk/trusty/x86_64/openjdk-1.8.0_60.tar.gz (0.9s)
-       Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.0s)<b class="conum">(7)</b>
------&gt; Downloading Open JDK Like Memory Calculator 2.0.0_RELEASE from https://download.run.pivotal.io/memory-calculator/trusty/x86_64/memory-calculator-2.0.0_RELEASE.tar.gz (0.0s)
-       Memory Settings: -XX:MaxMetaspaceSize=64M -XX:MetaspaceSize=64M -Xms382293K -Xss995K -Xmx382293K
------&gt; Downloading Spring Auto Reconfiguration 1.10.0_RELEASE from https://download.run.pivotal.io/auto-reconfiguration/auto-reconfiguration-1.10.0_RELEASE.jar (0.0s)
-
------&gt; Uploading droplet (56M)<b class="conum">(8)</b>
-
-1 of 1 instances running
-
-App started
-
-
-OK
-
-App hello-spring-boot was started using this command `CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-2.0.0_RELEASE -memorySizes=metaspace:64m.. -memoryWeights=heap:75,metaspace:10,native:10,stack:5 -memoryInitials=heap:100%,metaspace:100% -totMemory=$MEMORY_LIMIT) &amp;&amp; SERVER_PORT=$PORT $PWD/.java-buildpack/open_jdk_jre/bin/java -cp $PWD/.:$PWD/.java-buildpack/spring_auto_reconfiguration/spring_auto_reconfiguration-1.10.0_RELEASE.jar -Djava.io.tmpdir=$TMPDIR -XX:OnOutOfMemoryError=$PWD/.java-buildpack/open_jdk_jre/bin/killjava.sh $CALCULATED_MEMORY org.springframework.boot.loader.JarLauncher`<b class="conum">(9)</b>
-
-Showing health and status for app hello-spring-boot in org Northeast / Canada / space cjd as cdecelles@pivotal.io…<b class="conum">(10)</b>
-OK
-
-requested state: started
-instances: 1/1
-usage: 512M x 1 instances
-urls: hello-spring-boot-structural-obstructionist.cfapps.io
-last uploaded: Mon Oct 12 15:05:46 UTC 2015</pre>
-</div>
-</div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>The CLI is using a manifest to provide necessary configuration details such as application name, memory to be allocated, and path to the application artifact.
-Take a look at <code>manifest.yml</code> to see how.</p>
-</li>
-<li>
-<p>In most cases, the CLI indicates each Cloud Foundry API call as it happens.
-In this case, the CLI has created an application record for <em>Hello World</em> in your assigned space.</p>
-</li>
-<li>
-<p>All HTTP/HTTPS requests to applications will flow through Cloud Foundry&#8217;s front-end router called <a href="http://docs.cloudfoundry.org/concepts/architecture/router.html">(Go)Router</a>.
-Here the CLI is creating a route with random word tokens inserted (again, see <code>manifest.yml</code> for a hint!) to prevent route collisions across the default <code>cfapps.io</code> domain.</p>
-</li>
-<li>
-<p>Now the CLI is <em>binding</em> the created route to the application.
-Routes can actually be bound to multiple applications to support techniques such as <a href="http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry">blue-green deployments</a>.</p>
-</li>
-<li>
-<p>The CLI finally uploads the application bits to PWS. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
-</li>
-<li>
-<p>Now we begin the staging process. The <a href="https://github.com/cloudfoundry/java-buildpack">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
-</li>
-<li>
-<p>Here we see the version of the JRE that has been chosen and installed.</p>
-</li>
-<li>
-<p>The complete package of your application and all of its necessary runtime components is called a <em>droplet</em>.
-Here the droplet is being uploaded to PWS&#8217;s internal blobstore so that it can be easily copied to one or more <em><a href="http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html">Droplet Execution Agents (DEA&#8217;s)</a></em> for execution.</p>
-</li>
-<li>
-<p>The CLI tells you exactly what command and argument set was used to start your application.</p>
-</li>
-<li>
-<p>Finally the CLI reports the current status of your application&#8217;s health.
-You can get the same output at any time by typing <code>cf app hello-spring-boot</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Visit the application in your browser by hitting the route that was generated by the CLI:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/Hello.png" alt="Hello">
-</div>
-</div>
-</li>
-</ol>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-14 14:10:43 EDT
+Last updated 2015-10-13 11:27:06 EDT
 </div>
 </div>
 </body>

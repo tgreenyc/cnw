@@ -1,5 +1,5 @@
 :compat-mode:
-= Lab 6 - Monitoring Applications
+= Lab 6 - Monitoring, Logging and Health 
 
 Cloud Foundry provides several built-in mechanisms that allow us to monitor our applications' state changes and behavior.
 Additionally, Cloud Foundry actively monitors the health of our application processes and will restart them should they crash.

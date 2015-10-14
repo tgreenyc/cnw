@@ -4,6 +4,8 @@
 In this lab we're going to build a Guestbook application that allows the user to enter information in the U/I.
 The resulting application looks like the following screenshot:
 
+image::Common/images/Guestbook_local.png[]
+
 == Bootstrapping
 
 . Choose *File -> Import*:
