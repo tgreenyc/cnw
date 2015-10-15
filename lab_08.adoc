@@ -35,7 +35,7 @@ OK
 +
 image:Common/images/space_dashboard.png[]
 
-. In the resulting Config Server Dashboard, ensure that *Git* is selected, paste `https://github.com/mstine/config-repo.git` into the *Git URI* field, and click *Submit*:
+. In the resulting Config Server Dashboard, ensure that *Git* is selected, paste `https://github.com/jaimegag/config-repo.git` into the *Git URI* field, and click *Submit*:
 +
 image:Common/images/config_server_dashboard.png[]
 
@@ -62,7 +62,7 @@ image:Common/images/pcf_circuit_breaker_1.png[]
 . Stop the fortunes application:
 +
 ----
-$ cf stop fortunes
+$ cf stop fortune-service
 ----
 
 . Access the fortunes-ui and see that the ``fallback fortune'' is being returned.
@@ -76,7 +76,7 @@ image:Common/images/pcf_circuit_breaker_2.png[]
 . Start the fortunes application:
 +
 ----
-$ cf start fortunes
+$ cf start fortune-service
 ----
 
 . Continue to access the fortunes-ui and watch the dashboard.

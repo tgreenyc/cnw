@@ -105,7 +105,7 @@ public class Message implements Serializable {
 +
 Add the appropriate imports using the IDE's quick fix feature.
 +
-This class represents the domain model for a fortune, having an unique identifier and the fortune's text.
+This class represents the domain model for a message. It has a unique identifier, the name of the person adding the message, the message's text and an associated fortune's text.
 
 . Next, create the package `io.spring.cloud.samples.guestbook.repositories`.
 
@@ -173,6 +173,10 @@ image::Common/images/sts_run_as_boot_guestbook.png[width=50%]
 
 . Browse to http://localhost:8085.
 You should see output similar to the following:
++
+image::Common/images/Guestbook_home.png[]
+
+. Click Guestbook Message and add a message. You should see output similar to following:
 +
 image::Common/images/Guestbook_local.png[]
 
