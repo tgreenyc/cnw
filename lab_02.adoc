@@ -5,10 +5,10 @@
 
 . If you haven't already, download the latest release of the Cloud Foundry CLI from https://github.com/cloudfoundry/cli/releases for your operating system and install it.
 
-. Set the API target for the CLI:
+. Set the API target for the CLI. Please ask the instructor for the API target url.
 +
 ----
-$ cf api api.run.pivotal.io
+$ cf api $TARGET_URL
 ----
 
 . Login to Pivotal Web Services:
