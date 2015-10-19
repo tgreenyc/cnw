@@ -663,55 +663,21 @@ Cloud Foundry currently only provides short-term retention of logs.
 To meet these needs, Cloud Foundry provides the ability to <a href="http://docs.cloudfoundry.org/devguide/services/log-management.html">drain logs to third-party providers.</a></p>
 </div>
 <div class="paragraph">
-<p>In this section, we&#8217;ll drain logs to a very simple provider called <a href="https://papertrailapp.com">Papertrail</a>.</p>
+<p>In this section, we&#8217;ll drain logs to a very simple provider called <a href="https://papertrailapp.com">Papertrail</a>.
+You can set up a third party log management service based on the instructions <a href="https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">here.</a></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Visit <a href="https://papertrailapp.com" class="bare">https://papertrailapp.com</a> and create a free account.</p>
-</li>
-<li>
-<p>Login to your account and add your first system:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/papertrail_1.png" alt="papertrail 1">
+<div class="paragraph">
+<p>For this, lab, we will use a Cloud Foundry <a href="http://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a> to create the log drain for our application using the URL + Port provided by Papertrail.</p>
 </div>
-</div>
-</li>
-<li>
-<p>Click on ``Heroku’’:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/papertrail_2.png" alt="papertrail 2">
-</div>
-</div>
-</li>
-<li>
-<p>Choose &#8220;I use Heroku&#8221; and provide a name:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/papertrail_3.png" alt="papertrail 3">
-</div>
-</div>
-</li>
-<li>
-<p>Note the URL + Port assigned to your application:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/papertrail_4.png" alt="papertrail 4">
-</div>
-</div>
-</li>
-<li>
-<p>We&#8217;ll use a Cloud Foundry <a href="http://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a> to create the log drain for our application using the URL + Port provided by Papertrail:</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:36251
+<pre>$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:51203
 Creating user provided service guestbook-logs in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
 OK</pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>We bind that service instance:</p>
 <div class="listingblock">
@@ -732,12 +698,7 @@ TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect<
 </div>
 </li>
 <li>
-<p>Refresh the Papertrail browser tab to see log events immediately flowing to the log viewing page:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/papertrail_5.png" alt="papertrail 5">
-</div>
-</div>
+<p>Now you should be able to see log events immediately flowing to the Papertrail log viewing page:</p>
 </li>
 </ol>
 </div>
@@ -861,7 +822,7 @@ time                          event                 actor                  descr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-14 14:32:40 EDT
+Last updated 2015-10-19 19:11:21 EDT
 </div>
 </div>
 </body>

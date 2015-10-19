@@ -178,29 +178,12 @@ Cloud Foundry currently only provides short-term retention of logs.
 To meet these needs, Cloud Foundry provides the ability to http://docs.cloudfoundry.org/devguide/services/log-management.html[drain logs to third-party providers.]
 
 In this section, we'll drain logs to a very simple provider called https://papertrailapp.com[Papertrail].
+You can set up a third party log management service based on the instructions https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[here.]
 
-. Visit https://papertrailapp.com and create a free account.
+For this, lab, we will use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail.
 
-. Login to your account and add your first system:
-+
-image::Common/images/papertrail_1.png[]
-
-. Click on ``Heroku’’:
-+
-image::Common/images/papertrail_2.png[]
-
-. Choose ``I use Heroku'' and provide a name:
-+
-image::Common/images/papertrail_3.png[]
-
-. Note the URL + Port assigned to your application:
-+
-image::Common/images/papertrail_4.png[]
-
-. We'll use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail:
-+
 ----
-$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:36251
+$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:51203
 Creating user provided service guestbook-logs in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
 OK
 ----
@@ -220,9 +203,7 @@ TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect
 $ cf restart guestbook
 ----
 
-. Refresh the Papertrail browser tab to see log events immediately flowing to the log viewing page:
-+
-image::Common/images/papertrail_5.png[]
+. Now you should be able to see log events immediately flowing to the Papertrail log viewing page:
 
 You can see how to connect to other third-party log management systems in the http://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[Cloud Foundry documentation].
 
