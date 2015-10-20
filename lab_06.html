@@ -424,6 +424,94 @@ In this lab, we&#8217;ll explore a few of these mechanisms.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_using_spring_actuator">Using Spring Actuator</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Change to the lab directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ cd $COURSE_HOME/labs/initial/guestbook</pre>
+</div>
+</div>
+</li>
+<li>
+<p>To <code>pom.xml</code> add the following dependency to include the starter for Spring Boot Actuator:</p>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introspection_endpoints">Introspection Endpoints</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Build the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ mvn package</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar target/guestbook-0.0.1-SNAPSHOT.jar</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Try out the following endpoints. The output is omitted here because it can be quite large:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="http://localhost:8085/beans" class="bare">http://localhost:8085/beans</a></dt>
+<dd>
+<p>Dumps all of the beans in the Spring context.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/autoconfig" class="bare">http://localhost:8085/autoconfig</a></dt>
+<dd>
+<p>Dumps all of the auto-configuration performed as part of application bootstrapping.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/configprops" class="bare">http://localhost:8085/configprops</a></dt>
+<dd>
+<p>Displays a collated list of all <code>@ConfigurationProperties</code>.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/env" class="bare">http://localhost:8085/env</a></dt>
+<dd>
+<p>Dumps the application&#8217;s shell environment as well as all Java system properties.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/mappings" class="bare">http://localhost:8085/mappings</a></dt>
+<dd>
+<p>Dumps all URI request mappings and the controller methods to which they are mapped.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/dump" class="bare">http://localhost:8085/dump</a></dt>
+<dd>
+<p>Performs a thread dump.</p>
+</dd>
+<dt class="hdlist1"><a href="http://localhost:8085/trace" class="bare">http://localhost:8085/trace</a></dt>
+<dd>
+<p>Displays trace information (by default the last few HTTP requests).</p>
+</dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_events">Events</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -822,7 +910,7 @@ time                          event                 actor                  descr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-19 19:13:46 EDT
+Last updated 2015-10-20 13:12:53 EDT
 </div>
 </div>
 </body>
