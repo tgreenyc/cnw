@@ -610,6 +610,11 @@ public class Fortune {
     public void setText(String text) {
         this.text = text;
     }
+
+     @Override
+  	public String toString() {
+  		return "Fortune [id=" + id + ", text=" + text + "]\n";
+  	}
 }</pre>
 </div>
 </div>
@@ -665,6 +670,14 @@ public class FortuneController {
 
     @RequestMapping("/random")
     public Fortune randomFortune() {
+    	LOGGER.info("debug is enabled: " + LOGGER.isDebugEnabled());
+    	if(LOGGER.isDebugEnabled()) {
+    	    Iterator&lt;Fortune&gt; fortunes = fortunes().iterator();
+    	   	while(fortunes.hasNext()){
+    	    LOGGER.debug(fortunes.next().toString());
+    	   	}
+    	}
+
         List&lt;Fortune&gt; randomFortunes = repository.randomFortunes(new PageRequest(0, 1));
         return randomFortunes.get(0);
     }
@@ -981,7 +994,7 @@ You should see output similar to the following:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-19 20:32:18 EDT
+Last updated 2015-10-19 20:49:54 EDT
 </div>
 </div>
 </body>

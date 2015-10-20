@@ -10,8 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.Iterables;
-
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -31,7 +30,10 @@ public class FortuneController {
     public Fortune randomFortune() {
     	LOGGER.info("debug is enabled: " + LOGGER.isDebugEnabled());
     	if(LOGGER.isDebugEnabled()) {
-    		LOGGER.debug(Iterables.toString(fortunes()));
+    	    Iterator<Fortune> fortunes = fortunes().iterator();
+    	   	while(fortunes.hasNext()){
+    	    LOGGER.debug(fortunes.next().toString());
+    	   	}
     	}
     	
         List<Fortune> randomFortunes = repository.randomFortunes(new PageRequest(0, 1));
