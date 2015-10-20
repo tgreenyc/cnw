@@ -40,10 +40,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/jaimegag/config-repo.git
+          uri: https://github.com/saurabhguptasg/cnw-config-repo
 ----
 +
-These properties tell the Config Server to listen on port `8888` and to source its configuration from the Git repository found at https://github.com/jaimegag/config-repo.
+These properties tell the Config Server to listen on port `8888` and to source its configuration from the Git repository found at https://github.com/saurabhguptasg/cnw-config-repo.
 
 . Right click on `io.spring.cloud.samples.fortuneteller.configserver.Application` and choose *Run As -> Spring Boot App*:
 +

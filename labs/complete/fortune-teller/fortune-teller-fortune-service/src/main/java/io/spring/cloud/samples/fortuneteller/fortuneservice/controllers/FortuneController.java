@@ -2,15 +2,22 @@ package io.spring.cloud.samples.fortuneteller.fortuneservice.controllers;
 
 import io.spring.cloud.samples.fortuneteller.fortuneservice.domain.Fortune;
 import io.spring.cloud.samples.fortuneteller.fortuneservice.repositories.FortuneRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Iterables;
+
 import java.util.List;
 
 @RestController
 public class FortuneController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(FortuneController.class);
 
     @Autowired
     FortuneRepository repository;
@@ -22,6 +29,11 @@ public class FortuneController {
 
     @RequestMapping("/random")
     public Fortune randomFortune() {
+    	LOGGER.info("debug is enabled: " + LOGGER.isDebugEnabled());
+    	if(LOGGER.isDebugEnabled()) {
+    		LOGGER.debug(Iterables.toString(fortunes()));
+    	}
+    	
         List<Fortune> randomFortunes = repository.randomFortunes(new PageRequest(0, 1));
         return randomFortunes.get(0);
     }

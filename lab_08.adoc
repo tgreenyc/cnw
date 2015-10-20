@@ -35,7 +35,7 @@ OK
 +
 image:Common/images/space_dashboard.png[]
 
-. In the resulting Config Server Dashboard, ensure that *Git* is selected, paste `https://github.com/jaimegag/config-repo.git` into the *Git URI* field, and click *Submit*:
+. In the resulting Config Server Dashboard, ensure that *Git* is selected, paste `https://github.com/saurabhguptasg/cnw-config-repo.git` into the *Git URI* field, and click *Submit*:
 +
 image:Common/images/config_server_dashboard.png[]
 

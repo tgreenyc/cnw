@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "fortunes")
 public class Fortune {
 
-    @Id
+	@Id
     @GeneratedValue
     private Long id;
 
@@ -28,4 +28,10 @@ public class Fortune {
     public void setText(String text) {
         this.text = text;
     }
+    
+    @Override
+  	public String toString() {
+  		return "Fortune [id=" + id + ", text=" + text + "]\n";
+  	}
+
 }
