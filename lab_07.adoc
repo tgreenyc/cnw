@@ -165,6 +165,8 @@ Into that class, paste the following code:
 @RestController
 public class FortuneController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(FortuneController.class);
+
     @Autowired
     FortuneRepository repository;
 

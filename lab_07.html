@@ -660,6 +660,8 @@ Into that class, paste the following code:</p>
 <pre>@RestController
 public class FortuneController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(FortuneController.class);
+
     @Autowired
     FortuneRepository repository;
 
@@ -994,7 +996,7 @@ You should see output similar to the following:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-19 20:49:54 EDT
+Last updated 2015-10-21 11:05:25 EDT
 </div>
 </div>
 </body>
