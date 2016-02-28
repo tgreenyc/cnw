@@ -26,17 +26,9 @@ public class FortuneController {
         return repository.findAll();
     }
 
-    @RequestMapping("/random")
-    public Fortune randomFortune() {
-    	LOGGER.info("debug is enabled: " + LOGGER.isDebugEnabled());
-    	if(LOGGER.isDebugEnabled()) {
-    	    Iterator<Fortune> fortunes = fortunes().iterator();
-    	   	while(fortunes.hasNext()){
-    	    LOGGER.debug(fortunes.next().toString());
-    	   	}
-    	}
-    	
-        List<Fortune> randomFortunes = repository.randomFortunes(new PageRequest(0, 1));
-        return randomFortunes.get(0);
-    }
+  @RequestMapping("/random")
+  public Fortune randomFortune() {
+    List<Fortune> randomFortunes = repository.randomFortunes(new PageRequest(0, 1));
+    return randomFortunes.get(0);
+  }
 }
