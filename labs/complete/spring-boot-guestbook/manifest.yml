@@ -3,5 +3,5 @@ applications:
 - name: guestbook
   memory: 512M
   instances: 1
-  host: guestbook-${random-word}
+  host: guestbook-fernys
   path: ./target/guestbook-0.0.1-SNAPSHOT.jar
