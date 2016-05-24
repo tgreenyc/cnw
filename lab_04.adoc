@@ -123,8 +123,9 @@ Once the application is running again, revisit or refresh the browser tab where 
 image::Common/images/Guestbook_db.png[]
 
 . *(OPTIONAL STEPS)* You can also take a look at the _Guestbook_ data directly in the database.
++
 You can do this by connecting your favorite SQL Client to to the `guestbook-db` Database:
 Launch your client, create a new server connection and populate the properties with values from the URI in your `VCAP_SERVICES` environment variable (remember `cf env guestbook`!):
-
++
 Another alternative is to deploy a SQL client like PHPMyAdmin in Cloud Foundry and use it to connect to the MySQL instances. This is specially usefull with locked-down environments where your workstation can't acces PCF internal network. In order to do this you can clone this Git Repo and follow the instrations there: https://github.com/dmikusa-pivotal/cf-ex-phpmyadmin
-
++
