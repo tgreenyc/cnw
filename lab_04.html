@@ -598,31 +598,9 @@ Let&#8217;s take a look at the environment variables for our application to see 
 </div>
 </li>
 <li>
-<p><strong>(OPTIONAL STEPS)</strong> If you have a PostgreSQL GUI tool handy (you can download a free one at <a href="http://www.pgadmin.org/download" class="bare">http://www.pgadmin.org/download</a>), you can also take a look at the <em>Guestbook</em> data directly in the database.</p>
-</li>
-<li>
-<p>In pgAdmin, create a new server connection and populate the properties with values from the URI in your <code>VCAP_SERVICES</code> environment variable (remember <code>cf env guestbook</code>!):</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_props.png" alt="pgadmin props">
-</div>
-</div>
-</li>
-<li>
-<p>Connect to the server and scroll (if necessary) until you find your specific database instance:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_db_instance.png" alt="pgadmin db instance">
-</div>
-</div>
-</li>
-<li>
-<p>Right-click on the <code>message</code> table and choose &#8220;View Data &gt; View All Rows&#8221; to see the data inserted as part of <em>Guestbook</em>’s startup process:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_table.png" alt="pgadmin table">
-</div>
-</div>
+<p><strong>(OPTIONAL STEPS)</strong> You can also take a look at the Guestbook data directly in the database..</p>
+<p>You can do this by connecting your favorite SQL Client to to the guestbook-db Database: Launch your client, create a new server connection and populate the properties with values from the URI in your <code>VCAP_SERVICES</code> environment variable (remember <code>cf env guestbook</code>!)</p>
+<p>Another alternative is to deploy a SQL client like PHPMyAdmin in Cloud Foundry and use it to connect to the MySQL instances. This is specially usefull with locked-down environments where your workstation can’t acces PCF internal network. In order to do this you can clone this Git Repo and follow the instrations there: <a href="https://github.com/dmikusa-pivotal/cf-ex-phpmyadmin" class="bare">https://github.com/dmikusa-pivotal/cf-ex-phpmyadmin</a></p>
 </li>
 </ol>
 </div>
