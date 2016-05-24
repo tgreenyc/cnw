@@ -250,7 +250,7 @@ You can see how to connect to other third-party log management systems in the ht
 
 == Health
 
-Cloud Foundry's http://docs.cloudfoundry.org/concepts/architecture/#hm9k[Heatlh Manager] actively monitors the health of our application processes and will restart them should they crash.
+Cloud Foundry's Heatlh Manager actively monitors the health of our application processes and will restart them should they crash.
 
 . If you don't have one already running, start a log tail for `guestbook`:
 +
@@ -260,7 +260,7 @@ $ cf logs guestbook
 
 . Visit the application in the browser, and click on the ``Kill App’’ button. This button will trigger a JVM exit with an error code (`System.exit(1)`), causing the Health Manager to observe an application instance crash:
 +
-image::Common/images/Guestbook_scale_kill.png[]
+image::Common/images/Guestbook_kill.png[]
 
 . After clicking the kill app a couple of interesting things should happen.
 First, you'll see an error code returned in the browser, as the request you submitted never returns a response:
@@ -309,5 +309,5 @@ time                          event                 actor                  descr
 
 . Revisiting the *HOME PAGE* of the application (don't simply refresh the browser as you're still on the `/killApp` endpoint and you'll just kill the application again!) and you should see a fresh instance started:
 +
-image::Common/images/Guestbook_healed.png[]
+image::Common/images/Guestbook_healed_new.png[]
 
