@@ -24,13 +24,6 @@ spring:
 ---
 
 spring:
-  profiles: pcf
+  profiles: cloud
   jpa:
     database: MYSQL
-
----
-
-spring:
-  profiles: pws
-  jpa:
-    database: POSTGRESQL

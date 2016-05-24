@@ -5,4 +5,3 @@ applications:
   instances: 1
   host: guestbook-${random-word}
   path: ./target/guestbook-0.0.1-SNAPSHOT.jar
-  services: [mysql]
