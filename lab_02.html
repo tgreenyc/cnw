@@ -579,7 +579,7 @@ Routes can actually be bound to multiple applications to support techniques such
 </li>
 <li>
 <p>The complete package of your application and all of its necessary runtime components is called a <em>droplet</em>.
-Here the droplet is being uploaded to PCF&#8217;s internal blobstore so that it can be easily copied to one or more <em><a href="http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html">Droplet Execution Agents (DEA&#8217;s)</a></em> for execution.</p>
+Here the droplet is being uploaded to PCF&#8217;s internal blobstore so that it can be easily deployed to one or more containers in the Diego Cells following an <em><a href="http://docs.pivotal.io/pivotalcf/concepts/diego/diego-auction.html">Auction Algorithm</a></em>.</p>
 </li>
 <li>
 <p>The CLI tells you exactly what command and argument set was used to start your application.</p>
