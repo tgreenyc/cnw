@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>Create manifest file that defines how the application should be pushed to PWS.  In the <code>$COURSE_HOME/labs/initial/hello-spring-boot</code> directory create a file called <code>manifest.yml</code>.</p>
+<p>Create manifest file that defines how the application should be pushed to PCF.  In the <code>$COURSE_HOME/labs/initial/hello-spring-boot</code> directory create a file called <code>manifest.yml</code>.</p>
 <div class="paragraph">
 <p>Into that file, paste the following configuration properties:</p>
 </div>
@@ -569,7 +569,7 @@ Here the CLI is creating a route with random word tokens inserted (again, see <c
 Routes can actually be bound to multiple applications to support techniques such as <a href="http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry">blue-green deployments</a>.</p>
 </li>
 <li>
-<p>The CLI finally uploads the application bits to PWS. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
+<p>The CLI finally uploads the application bits to PCF. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
 </li>
 <li>
 <p>Now we begin the staging process. The <a href="https://github.com/cloudfoundry/java-buildpack">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
@@ -579,7 +579,7 @@ Routes can actually be bound to multiple applications to support techniques such
 </li>
 <li>
 <p>The complete package of your application and all of its necessary runtime components is called a <em>droplet</em>.
-Here the droplet is being uploaded to PWS&#8217;s internal blobstore so that it can be easily copied to one or more <em><a href="http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html">Droplet Execution Agents (DEA&#8217;s)</a></em> for execution.</p>
+Here the droplet is being uploaded to PCF&#8217;s internal blobstore so that it can be easily copied to one or more <em><a href="http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html">Droplet Execution Agents (DEA&#8217;s)</a></em> for execution.</p>
 </li>
 <li>
 <p>The CLI tells you exactly what command and argument set was used to start your application.</p>
