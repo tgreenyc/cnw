@@ -112,7 +112,7 @@ last uploaded: Mon Oct 12 15:05:46 UTC 2015
 Take a look at `manifest.yml` to see how.
 <2> In most cases, the CLI indicates each Cloud Foundry API call as it happens.
 In this case, the CLI has created an application record for _Hello World_ in your assigned space.
-<3> All HTTP/HTTPS requests to applications will flow through Cloud Foundry's front-end router called http://docs.cloudfoundry.org/concepts/architecture/router.html[(Go)Router].
+<3> All HTTP/HTTPS requests to applications will flow through Cloud Foundry's front-end router called http://docs.pivotal.io/pivotalcf/concepts/architecture/router.html[(Go)Router].
 Here the CLI is creating a route with random word tokens inserted (again, see `manifest.yml` for a hint!) to prevent route collisions across the default `cfapps.io` domain.
 <4> Now the CLI is _binding_ the created route to the application.
 Routes can actually be bound to multiple applications to support techniques such as http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry[blue-green deployments].
