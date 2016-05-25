@@ -561,18 +561,18 @@ Take a look at <code>manifest.yml</code> to see how.</p>
 In this case, the CLI has created an application record for <em>Hello World</em> in your assigned space.</p>
 </li>
 <li>
-<p>All HTTP/HTTPS requests to applications will flow through Cloud Foundry&#8217;s front-end router called <a href="http://docs.cloudfoundry.org/concepts/architecture/router.html">(Go)Router</a>.
+<p>All HTTP/HTTPS requests to applications will flow through Cloud Foundry&#8217;s front-end router called <a href="http://docs.pivotal.io/pivotalcf/concepts/architecture/router.html">(Go)Router</a>.
 Here the CLI is creating a route with random word tokens inserted (again, see <code>manifest.yml</code> for a hint!) to prevent route collisions across the default <code>cfapps.io</code> domain.</p>
 </li>
 <li>
 <p>Now the CLI is <em>binding</em> the created route to the application.
-Routes can actually be bound to multiple applications to support techniques such as <a href="http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry">blue-green deployments</a>.</p>
+Routes can actually be bound to multiple applications to support techniques such as <a href="http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/blue-green.html">blue-green deployments</a>.</p>
 </li>
 <li>
 <p>The CLI finally uploads the application bits to PCF. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
 </li>
 <li>
-<p>Now we begin the staging process. The <a href="https://github.com/cloudfoundry/java-buildpack">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
+<p>Now we begin the staging process. The <a href="http://docs.pivotal.io/pivotalcf/buildpacks/java/">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
 </li>
 <li>
 <p>Here we see the version of the JRE that has been chosen and installed.</p>
