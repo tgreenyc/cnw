@@ -7,14 +7,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
-security:
-  basic:
-    enabled: false
-
-management:
-  security:
-    enabled: false
-
 ---
 
 spring:
