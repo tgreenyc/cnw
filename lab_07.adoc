@@ -54,7 +54,7 @@ You should see output similar to the following:
 +
 image::Common/images/config_server_output.png[width=50%]
 +
-Note that the response JSON defines a Spring `PropertySource` that contains Eureka configuration consistent with what you saw in the Git repository.
+Note that the response JSON defines a Spring `PropertySource` that contains configuration consistent with what you saw in the Git repository.
 
 == Eureka Server
 
