@@ -305,7 +305,7 @@ time                          event                 actor                  descr
 <2> The new application instance starts logging events as it starts up.
 ====
 
-. Revisiting the *HOME PAGE* of the application (don't simply refresh the browser as you're still on the `/killApp` endpoint and you'll just kill the application again!) and you should see a fresh instance started:
+. Revisiting the *HOME PAGE* of the application and you should see a fresh instance started:
 +
 image::Common/images/Guestbook_healed_new.png[]
 
