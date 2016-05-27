@@ -4,6 +4,8 @@
 
 . In your browser, visit http://start.spring.io.
 
+. Click on the *Switch to the full version* link.
+
 . Fill out the *Project metadata* fields as follows:
 +
 Group:: `io.pivotal.spring`
@@ -11,7 +13,6 @@ Artifact:: `hello-spring-boot`
 Name:: `hello-spring-boot`
 Description:: `Hello Spring Boot`
 Package Name:: `io.pivotal.spring.hello`
-Type:: Maven Project
 Packaging:: Jar
 Java Version:: 1.8
 Language:: Java
@@ -26,6 +27,13 @@ Unpack that zip file at `$COURSE_HOME/labs/initial`.
 . Import the project's `pom.xml` into your editor/IDE of choice.
 
 . Add a `@RestController` annotation to the class `io.pivotal.spring.hello.HelloSpringBootApplication`.
++
+[source,java]
+---
+@RestController
+@SpringBootApplication
+public class HelloSpringBootApplication {
+---
 
 . Add the following request handler to the class `io.pivotal.spring.hello.HelloSpringBootApplication`:
 +
@@ -36,6 +44,13 @@ public String hello() {
     return "Hello World!";
 }
 ----
+. Add the required imports for the annotations shown above:
++
+[source,java]
+---
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+---
 
 == Build and Run with Embedded Apache Tomcat
 
