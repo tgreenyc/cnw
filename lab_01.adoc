@@ -4,6 +4,8 @@
 
 . In your browser, visit http://start.spring.io.
 
+. Click on the *Switch to the full version* link.
+
 . Fill out the *Project metadata* fields as follows:
 +
 Group:: `io.pivotal.spring`
@@ -11,7 +13,6 @@ Artifact:: `hello-spring-boot`
 Name:: `hello-spring-boot`
 Description:: `Hello Spring Boot`
 Package Name:: `io.pivotal.spring.hello`
-Type:: Maven Project
 Packaging:: Jar
 Java Version:: 1.8
 Language:: Java
