@@ -29,11 +29,11 @@ Unpack that zip file at `$COURSE_HOME/labs/initial`.
 . Add a `@RestController` annotation to the class `io.pivotal.spring.hello.HelloSpringBootApplication`.
 +
 [source,java]
----
+----
 @RestController
 @SpringBootApplication
 public class HelloSpringBootApplication {
----
+----
 
 . Add the following request handler to the class `io.pivotal.spring.hello.HelloSpringBootApplication`:
 +
@@ -44,13 +44,13 @@ public String hello() {
     return "Hello World!";
 }
 ----
-. Add the required imports for the annotations shown above:
+. Add the required imports to `io.pivotal.spring.hello.HelloSpringBootApplication` for the annotations shown above:
 +
 [source,java]
----
+----
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
----
+----
 
 == Build and Run with Embedded Apache Tomcat
 
