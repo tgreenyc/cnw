@@ -54,7 +54,7 @@ You should see output similar to the following:
 +
 image::Common/images/config_server_output.png[width=50%]
 +
-Note that the response JSON defines a Spring `PropertySource` that contains Eureka configuration consistent with what you saw in the Git repository.
+Note that the response JSON defines a Spring `PropertySource` that contains configuration consistent with what you saw in the Git repository.
 
 == Eureka Server
 
@@ -217,6 +217,17 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+ribbon:
+   IsSecure: false
+
+security:
+   basic:
+      enabled: false
+      
+management:
+   security:
+      enabled: false
+
 ---
 
 spring:
@@ -233,6 +244,7 @@ spring:
 ----
 +
 This configuration specifies the model to DDL setting to be used by Hibernate, as well as the Hibernate dialects to be used for local development and cloud.
+It also disables HTTP basic authentication to be able access the endpoints of this service without addressing application security (not covered in this lab).
 
 . As before, right click on `io.spring.cloud.samples.fortuneteller.fortuneservice.Application` and choose *Run As -> Spring Boot App*.
 
@@ -362,9 +374,21 @@ eureka:
   client:
     registryFetchIntervalSeconds: 5
 
+ribbon:
+   IsSecure: false
+   
 fortunes:
   ribbon:
     ServerListRefreshInterval: 5000
+    
+security:
+   basic:
+      enabled: false
+
+management:
+   security:
+      enabled: false
+      
 ----
 +
 This configuration instructs the application to listen on port 8081.

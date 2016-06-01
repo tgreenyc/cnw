@@ -464,7 +464,7 @@ Let&#8217;s change that.</p>
 <h2 id="_the_services_marketplace">The Services Marketplace</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to discover what services are available on Pivotal Web Services.
+<p>There are two ways to discover what services are available on Pivotal Cloud Foundry.
 The first is available on any instance of Cloud Foundry: the CLI. Just type:</p>
 </div>
 <div class="listingblock">
@@ -473,18 +473,18 @@ The first is available on any instance of Cloud Foundry: the CLI. Just type:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and you&#8217;ll get a list of services, their available plans, and descriptions. On Pivotal Web Services, the &#8220;free&#8221; tier of plans is normally the first one listed (e.g. <code>turtle</code> for <code>elephansql</code>).</p>
+<p>and you&#8217;ll get a list of services, their available plans, and descriptions. When on Pivotal Web Services, the &#8220;free&#8221; tier of plans is normally the first one listed (e.g. <code>turtle</code> for <code>elephansql</code>).</p>
 </div>
 <div class="paragraph">
-<p>The second way is specific to PWS&#8217;s Application Manager UI.
-If you haven&#8217;t already, login to it by visiting <a href="http://console.run.pivotal.io" class="bare">http://console.run.pivotal.io</a>.</p>
+<p>If you haven&#8217;t already, login to it by visiting http://apps.your-system-domain (e.g. https://apps.system.pcfaws.jagapps.co)
+When on PWS visit this URL isntead <a href="http://console.run.pivotal.io" class="bare">http://console.run.pivotal.io.</a></p>
 </div>
 <div class="paragraph">
 <p>Click on the &#8220;Marketplace&#8221; link:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="Common/images/PWS_AM_InstructorSpace.png" alt="PWS AM InstructorSpace">
+<img src="Common/images/AM.png" alt="PCF Apps Manager">
 </div>
 </div>
 <div class="paragraph">
@@ -492,7 +492,7 @@ If you haven&#8217;t already, login to it by visiting <a href="http://console.ru
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="Common/images/PWS_Marketplace.png" alt="PWS Marketplace">
+<img src="Common/images/Marketplace.png" alt="Marketplace">
 </div>
 </div>
 </div>
@@ -503,12 +503,12 @@ If you haven&#8217;t already, login to it by visiting <a href="http://console.ru
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Let&#8217;s begin by creating a PostgreSQL instance provided by <a href="http://www.elephantsql.com/">ElephantSQL</a>.
-From the CLI, let&#8217;s <em>create</em> a free ElephantSQL service instance:</p>
+<p>Let&#8217;s begin by creating a MySQL instance.
+From the CLI, let&#8217;s <em>create</em> a 100mb-dev MySQL service instance:</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ cf create-service elephantsql turtle guestbook-db
-Creating service instance guestbook-db in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
+<pre>$ cf create-service p-mysql 100mb-dev guestbook-db
+Creating service instance guestbook-db in org teamno1 / space development as jaguilar...
 OK</pre>
 </div>
 </div>
@@ -518,7 +518,7 @@ OK</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ cf bs guestbook guestbook-db
-Binding service guestbook-db to app guestbook in org Northeast / Canada / space cjd as cdecelles@pivotal.io...
+Binding service guestbook-db to app guestbook in org teamno1 / space development as jaguilar...
 OK
 TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect</pre>
 </div>
@@ -541,33 +541,26 @@ Let&#8217;s take a look at the environment variables for our application to see 
 <div class="content">
 <pre>System-Provided:
 {
- "VCAP_SERVICES": { <b class="conum">(1)</b>
-  "elephantsql": [
+ "VCAP_SERVICES": {
+  "p-mysql": [
    {
     "credentials": {
-     "max_conns": "5",
-     "uri": "postgres://iojczbng:z8iqP5LnJaI8aIT3FEbDxJ-i2ZdDe5rX@pellefant-01.db.elephantsql.com:5432/iojczbng" <b class="conum">(2)</b>
+     "hostname": "10.0.16.63",
+     "jdbcUrl": "jdbc:mysql://10.0.16.63:3306/cf_9d2d4585_834e_44fb_aa82_f3fdbce6cdcc?user=64JeFkFjrBYIHume\u0026password=R3nPiIjsTK6TwUZq",
+     "name": "cf_9d2d4585_834e_44fb_aa82_f3fdbce6cdcc",
+     "password": "R3nPiIjsTK6TwUZq",
+     "port": 3306,
+     "uri": "mysql://64JeFkFjrBYIHume:R3nPiIjsTK6TwUZq@10.0.16.63:3306/cf_9d2d4585_834e_44fb_aa82_f3fdbce6cdcc?reconnect=true",
+     "username": "64JeFkFjrBYIHume"
     },
-    "label": "elephantsql",
+    "label": "p-mysql",
     "name": "guestbook-db",
-    "plan": "turtle",
+    "plan": "100mb-dev",
+    "provider": null,
+    "syslog_drain_url": null,
     "tags": [
-     "Data Stores",
-     "Web-based",
-     "User Provisioning",
-     "PaaS",
-     "Single Sign-On",
-     "Windows",
-     "New Product",
-     "Mac",
-     "Android",
-     "Certified Applications",
-     "Data Store",
-     "postgresql",
-     "Buyable",
-     "relational",
-     "Importable",
-     "IT Management"
+     "mysql",
+     "relational"
     ]
    }
   ]
@@ -581,7 +574,7 @@ Let&#8217;s take a look at the environment variables for our application to see 
 <p><code>VCAP_SERVICES</code> is a special Cloud Foundry environment variable that contains a JSON document containing all of the information for any services bound to an application.</p>
 </li>
 <li>
-<p>Notice here the unique URI for this instance of PostgreSQL that <code>guestbook</code> has been bound to.</p>
+<p>Notice here the unique URI for this instance of MySQL that <code>guestbook</code> has been bound to.</p>
 </li>
 </ol>
 </div>
@@ -596,7 +589,7 @@ Let&#8217;s take a look at the environment variables for our application to see 
 </div>
 </div>
 <div class="paragraph">
-<p>Once the application is running again, revisit or refresh the browser tab where you have the <em>Guestbook</em> application loaded. Add a few guestbook messages.  The application is now utilizing a PostgreSQL database via the <code>guestbook-db</code> service and the data is now persisted in a service bound database instead of in-memory database:</p>
+<p>Once the application is running again, revisit or refresh the browser tab where you have the <em>Guestbook</em> application loaded. Add a few guestbook messages.  The application is now utilizing a MySQL database via the <code>guestbook-db</code> service and the data is now persisted in a service bound database instead of in-memory database:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -605,31 +598,9 @@ Let&#8217;s take a look at the environment variables for our application to see 
 </div>
 </li>
 <li>
-<p><strong>(OPTIONAL STEPS)</strong> If you have a PostgreSQL GUI tool handy (you can download a free one at <a href="http://www.pgadmin.org/download" class="bare">http://www.pgadmin.org/download</a>), you can also take a look at the <em>Guestbook</em> data directly in the database.</p>
-</li>
-<li>
-<p>In pgAdmin, create a new server connection and populate the properties with values from the URI in your <code>VCAP_SERVICES</code> environment variable (remember <code>cf env guestbook</code>!):</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_props.png" alt="pgadmin props">
-</div>
-</div>
-</li>
-<li>
-<p>Connect to the server and scroll (if necessary) until you find your specific database instance:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_db_instance.png" alt="pgadmin db instance">
-</div>
-</div>
-</li>
-<li>
-<p>Right-click on the <code>message</code> table and choose &#8220;View Data &gt; View All Rows&#8221; to see the data inserted as part of <em>Guestbook</em>’s startup process:</p>
-<div class="imageblock">
-<div class="content">
-<img src="Common/images/pgadmin_table.png" alt="pgadmin table">
-</div>
-</div>
+<p><strong>(OPTIONAL STEPS)</strong> You can also take a look at the Guestbook data directly in the database..</p>
+<p>You can do this by connecting your favorite SQL Client to to the guestbook-db Database: Launch your client, create a new server connection and populate the properties with values from the URI in your <code>VCAP_SERVICES</code> environment variable (remember <code>cf env guestbook</code>!)</p>
+<p>Another alternative is to deploy a SQL client like PHPMyAdmin in Cloud Foundry and use it to connect to the MySQL instances. This is specially usefull with locked-down environments where your workstation can’t acces PCF internal network. In order to do this you can clone this Git Repo and follow the instrations there: <a href="https://github.com/dmikusa-pivotal/cf-ex-phpmyadmin" class="bare">https://github.com/dmikusa-pivotal/cf-ex-phpmyadmin</a></p>
 </li>
 </ol>
 </div>

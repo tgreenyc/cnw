@@ -180,24 +180,22 @@ Here are two interesting subsets of one output from that command:
 .CF Component Logs
 ====
 ----
-2015-10-13T09:19:54.49-0400 [RTR/1]      OUT guestbook-seismoscopic-incensement.cfapps.io - [13/10/2015:13:19:54 +0000] "GET /cloudinfo HTTP/1.1" 200 0 866 "http://guestbook-seismoscopic-incensement.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36" 10.10.66.58:35937 x_forwarded_for:"72.71.251.137" x_forwarded_proto:"http" vcap_request_id:fd54b949-52bc-4e6a-4f8a-0d1d56304574 response_time:0.069656344 app_id:8fef4557-bac8-433e-9fa0-b3931e76d38f <1>
-2015-10-13T09:24:09.08-0400 [API/6]      OUT Updated app with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f ({"instances"=>1}) <2>
-2015-10-13T09:24:10.11-0400 [DEA/26]     OUT Stopping app instance (index 4) with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f <3>
-2015-10-13T09:24:10.11-0400 [DEA/26]     OUT Stopped app instance (index 4) with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f
+2016-05-25T18:26:49.61-0400 [API/0]      OUT Updated app with guid 1f9098dc-7a6b-477b-9169-df6cac884d4a ({"instances"=>2})
+2016-05-25T18:26:49.62-0400 [CELL/1]     OUT Creating container
+2016-05-25T18:28:15.38-0400 [RTR/0]      OUT guestbook-fernys.apps.pcfaws.jagapps.co - [25/05/2016:22:28:15.327 +0000] "GET /cloudinfo HTTP/1.1" 200 0 640
 ----
-<1> An ``Apache-style'' access log event from the (Go)Router
-<2> An API log event that corresponds to an event as shown in `cf events`
-<3> A DEA log event indicating the start of an application instance on that DEA.
+<1> An API log event that corresponds to an event as shown in `cf events`
+<2> A CELL log event indicating the creation of a container inside that Cell.
+<3> An ``Apache-style'' access log event from the (Go)Router
 ====
 +
 .Application Logs
 ====
 ----
-2015-10-13T09:24:25.58-0400 [App/1]      OUT 2015-10-13 13:24:25.584  INFO 33 --- [           main] bbitCloudServiceBeanFactoryPostProcessor : Auto-reconfiguring beans of type org.springframework.amqp.rabbit.connection.ConnectionFactory
-2015-10-13T09:24:25.58-0400 [App/1]      OUT 2015-10-13 13:24:25.587  INFO 33 --- [           main] bbitCloudServiceBeanFactoryPostProcessor : No beans of type org.springframework.amqp.rabbit.connection.ConnectionFactory found. Skipping auto-reconfiguration.
-2015-10-13T09:24:25.60-0400 [App/1]      OUT 2015-10-13 13:24:25.604  INFO 33 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2015-10-13T09:24:25.66-0400 [App/2]      OUT  :: Spring Boot ::        (v1.2.4.RELEASE)
-2015-10-13T09:24:25.69-0400 [App/3]      OUT 2015-10-13 13:24:25.698  INFO 33 --- [           main] i.s.c.s.guestbook.GuestbookApplication   : Started GuestbookApplication in 2.046 seconds (JVM running for 3.816)
+2016-05-25T18:27:08.31-0400 [APP/1]      OUT 2016-05-25 22:27:08.316  INFO 18 --- [           main] o.s.i.endpoint.EventDrivenConsumer       : started org.springframework.integration.config.ConsumerEndpointFactoryBean#0
+2016-05-25T18:27:08.31-0400 [APP/1]      OUT 2016-05-25 22:27:08.316  INFO 18 --- [           main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2016-05-25T18:27:08.39-0400 [APP/1]      OUT 2016-05-25 22:27:08.397  INFO 18 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2016-05-25T18:27:08.40-0400 [APP/1]      OUT 2016-05-25 22:27:08.399  INFO 18 --- [           main] i.s.c.s.guestbook.GuestbookApplication   : Started GuestbookApplication in 13.216 seconds (JVM running for 13.838)
 ----
 ====
 +
@@ -216,12 +214,12 @@ You can try various things like refreshing the browser and triggering stop/start
 
 Application operators will also enjoy commands like `cf logs`, but are often interested in long-term retention, indexing, and analysis of logs as well.
 Cloud Foundry currently only provides short-term retention of logs.
-To meet these needs, Cloud Foundry provides the ability to http://docs.cloudfoundry.org/devguide/services/log-management.html[drain logs to third-party providers.]
+To meet these needs, Cloud Foundry provides the ability to http://docs.pivotal.io/pivotalcf/devguide/services/log-management.html[drain logs to third-party providers.]
 
 In this section, we'll drain logs to a very simple provider called https://papertrailapp.com[Papertrail].
-You can set up a third party log management service based on the instructions https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[here.]
+You can set up a third party log management service based on the instructions http://docs.pivotal.io/pivotalcf/devguide/services/log-management-thirdparty-svc.html[here.]
 
-. For this, lab, we will use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail.
+. For this, lab, we will use a Cloud Foundry http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail.
 +
 ----
 $ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:51203
@@ -246,11 +244,11 @@ $ cf restart guestbook
 
 . Now you should be able to see log events immediately flowing to the Papertrail log viewing page:
 
-You can see how to connect to other third-party log management systems in the http://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[Cloud Foundry documentation].
+You can see how to connect to other third-party log management systems in the http://docs.pivotal.io/pivotalcf/devguide/services/log-management-thirdparty-svc.html[Cloud Foundry documentation].
 
 == Health
 
-Cloud Foundry's http://docs.cloudfoundry.org/concepts/architecture/#hm9k[Heatlh Manager] actively monitors the health of our application processes and will restart them should they crash.
+Cloud Foundry's Heatlh Manager actively monitors the health of our application processes and will restart them should they crash.
 
 . If you don't have one already running, start a log tail for `guestbook`:
 +
@@ -260,7 +258,7 @@ $ cf logs guestbook
 
 . Visit the application in the browser, and click on the ``Kill App’’ button. This button will trigger a JVM exit with an error code (`System.exit(1)`), causing the Health Manager to observe an application instance crash:
 +
-image::Common/images/Guestbook_scale_kill.png[]
+image::Common/images/Guestbook_kill.png[]
 
 . After clicking the kill app a couple of interesting things should happen.
 First, you'll see an error code returned in the browser, as the request you submitted never returns a response:
@@ -307,7 +305,7 @@ time                          event                 actor                  descr
 <2> The new application instance starts logging events as it starts up.
 ====
 
-. Revisiting the *HOME PAGE* of the application (don't simply refresh the browser as you're still on the `/killApp` endpoint and you'll just kill the application again!) and you should see a fresh instance started:
+. Revisiting the *HOME PAGE* of the application and you should see a fresh instance started:
 +
-image::Common/images/Guestbook_healed.png[]
+image::Common/images/Guestbook_healed_new.png[]
 

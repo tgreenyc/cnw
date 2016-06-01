@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>Create manifest file that defines how the application should be pushed to PWS.  In the <code>$COURSE_HOME/labs/initial/hello-spring-boot</code> directory create a file called <code>manifest.yml</code>.</p>
+<p>Create manifest file that defines how the application should be pushed to PCF.  In the <code>$COURSE_HOME/labs/initial/hello-spring-boot</code> directory create a file called <code>manifest.yml</code>.</p>
 <div class="paragraph">
 <p>Into that file, paste the following configuration properties:</p>
 </div>
@@ -561,25 +561,25 @@ Take a look at <code>manifest.yml</code> to see how.</p>
 In this case, the CLI has created an application record for <em>Hello World</em> in your assigned space.</p>
 </li>
 <li>
-<p>All HTTP/HTTPS requests to applications will flow through Cloud Foundry&#8217;s front-end router called <a href="http://docs.cloudfoundry.org/concepts/architecture/router.html">(Go)Router</a>.
+<p>All HTTP/HTTPS requests to applications will flow through Cloud Foundry&#8217;s front-end router called <a href="http://docs.pivotal.io/pivotalcf/concepts/architecture/router.html">(Go)Router</a>.
 Here the CLI is creating a route with random word tokens inserted (again, see <code>manifest.yml</code> for a hint!) to prevent route collisions across the default <code>cfapps.io</code> domain.</p>
 </li>
 <li>
 <p>Now the CLI is <em>binding</em> the created route to the application.
-Routes can actually be bound to multiple applications to support techniques such as <a href="http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry">blue-green deployments</a>.</p>
+Routes can actually be bound to multiple applications to support techniques such as <a href="http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/blue-green.html">blue-green deployments</a>.</p>
 </li>
 <li>
-<p>The CLI finally uploads the application bits to PWS. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
+<p>The CLI finally uploads the application bits to PCF. Notice that it&#8217;s uploading <em>90 files</em>! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.</p>
 </li>
 <li>
-<p>Now we begin the staging process. The <a href="https://github.com/cloudfoundry/java-buildpack">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
+<p>Now we begin the staging process. The <a href="http://docs.pivotal.io/pivotalcf/buildpacks/java/">Java Buildpack</a> is responsible for assembling the runtime components necessary to run the application.</p>
 </li>
 <li>
 <p>Here we see the version of the JRE that has been chosen and installed.</p>
 </li>
 <li>
 <p>The complete package of your application and all of its necessary runtime components is called a <em>droplet</em>.
-Here the droplet is being uploaded to PWS&#8217;s internal blobstore so that it can be easily copied to one or more <em><a href="http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html">Droplet Execution Agents (DEA&#8217;s)</a></em> for execution.</p>
+Here the droplet is being uploaded to PCF&#8217;s internal blobstore so that it can be easily deployed to one or more containers in the Diego Cells following an <em><a href="http://docs.pivotal.io/pivotalcf/concepts/diego/diego-auction.html">Auction Algorithm</a></em>.</p>
 </li>
 <li>
 <p>The CLI tells you exactly what command and argument set was used to start your application.</p>

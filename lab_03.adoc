@@ -45,8 +45,6 @@ public class Message implements Serializable {
 
   private Date created;
   
-  private String fortune;
-
   protected Message(){
 	    this.created = new Date();
   }
@@ -77,14 +75,6 @@ public class Message implements Serializable {
     this.message = message;
   }
   
-  public String getFortune() {
-	  return fortune;
-  }
-
-  public void setFortune(String fortune) {
-	  this.fortune = fortune;
-  }
-  
   @JsonSerialize(using=JsonDateSerializer.class)
   public Date getCreated() {
     return created;
@@ -105,7 +95,7 @@ public class Message implements Serializable {
 +
 Add the appropriate imports using the IDE's quick fix feature.
 +
-This class represents the domain model for a message. It has a unique identifier, the name of the person adding the message, the message's text and an associated fortune's text.
+This class represents the domain model for a message. It has a unique identifier, the name of the person adding the message and the message's.
 
 . Next, create the package `io.spring.cloud.samples.guestbook.repositories`.
 

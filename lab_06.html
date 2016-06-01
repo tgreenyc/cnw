@@ -689,22 +689,21 @@ Application developers need only log all messages to either <code>STDOUT</code> 
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>2015-10-13T09:19:54.49-0400 [RTR/1]      OUT guestbook-seismoscopic-incensement.cfapps.io - [13/10/2015:13:19:54 +0000] "GET /cloudinfo HTTP/1.1" 200 0 866 "http://guestbook-seismoscopic-incensement.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36" 10.10.66.58:35937 x_forwarded_for:"72.71.251.137" x_forwarded_proto:"http" vcap_request_id:fd54b949-52bc-4e6a-4f8a-0d1d56304574 response_time:0.069656344 app_id:8fef4557-bac8-433e-9fa0-b3931e76d38f <b class="conum">(1)</b>
-2015-10-13T09:24:09.08-0400 [API/6]      OUT Updated app with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f ({"instances"=&gt;1}) <b class="conum">(2)</b>
-2015-10-13T09:24:10.11-0400 [DEA/26]     OUT Stopping app instance (index 4) with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f <b class="conum">(3)</b>
-2015-10-13T09:24:10.11-0400 [DEA/26]     OUT Stopped app instance (index 4) with guid 8fef4557-bac8-433e-9fa0-b3931e76d38f</pre>
+<pre>2016-05-25T18:26:49.61-0400 [API/0]      OUT Updated app with guid 1f9098dc-7a6b-477b-9169-df6cac884d4a ({"instances"=&gt;2}) <b class="conum">(1)</b>
+2016-05-25T18:26:49.62-0400 [CELL/1]     OUT Creating container <b class="conum">(2)</b>
+2016-05-25T18:28:15.38-0400 [RTR/0]      OUT guestbook-fernys.apps.pcfaws.jagapps.co - [25/05/2016:22:28:15.327 +0000] "GET /cloudinfo HTTP/1.1" 200 0 640 <b class="conum">(3)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
 <ol>
 <li>
-<p>An &#8220;Apache-style&#8221; access log event from the (Go)Router</p>
-</li>
-<li>
 <p>An API log event that corresponds to an event as shown in <code>cf events</code></p>
 </li>
 <li>
-<p>A DEA log event indicating the start of an application instance on that DEA.</p>
+<p>A CELL log event indicating the creation of a container inside that Cell.</p>
+</li>
+<li>
+<p>An &#8220;Apache-style&#8221; access log event from the (Go)Router</p>
 </li>
 </ol>
 </div>
@@ -715,11 +714,10 @@ Application developers need only log all messages to either <code>STDOUT</code> 
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>2015-10-13T09:24:25.58-0400 [App/1]      OUT 2015-10-13 13:24:25.584  INFO 33 --- [           main] bbitCloudServiceBeanFactoryPostProcessor : Auto-reconfiguring beans of type org.springframework.amqp.rabbit.connection.ConnectionFactory
-2015-10-13T09:24:25.58-0400 [App/1]      OUT 2015-10-13 13:24:25.587  INFO 33 --- [           main] bbitCloudServiceBeanFactoryPostProcessor : No beans of type org.springframework.amqp.rabbit.connection.ConnectionFactory found. Skipping auto-reconfiguration.
-2015-10-13T09:24:25.60-0400 [App/1]      OUT 2015-10-13 13:24:25.604  INFO 33 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2015-10-13T09:24:25.66-0400 [App/2]      OUT  :: Spring Boot ::        (v1.2.4.RELEASE)
-2015-10-13T09:24:25.69-0400 [App/3]      OUT 2015-10-13 13:24:25.698  INFO 33 --- [           main] i.s.c.s.guestbook.GuestbookApplication   : Started GuestbookApplication in 2.046 seconds (JVM running for 3.816)</pre>
+<pre>2016-05-25T18:27:08.31-0400 [APP/1]      OUT 2016-05-25 22:27:08.316  INFO 18 --- [           main] o.s.i.endpoint.EventDrivenConsumer       : started org.springframework.integration.config.ConsumerEndpointFactoryBean#0
+2016-05-25T18:27:08.31-0400 [APP/1]      OUT 2016-05-25 22:27:08.316  INFO 18 --- [           main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2016-05-25T18:27:08.39-0400 [APP/1]      OUT 2016-05-25 22:27:08.397  INFO 18 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2016-05-25T18:27:08.40-0400 [APP/1]      OUT 2016-05-25 22:27:08.399  INFO 18 --- [           main] i.s.c.s.guestbook.GuestbookApplication   : Started GuestbookApplication in 13.216 seconds (JVM running for 13.838)</pre>
 </div>
 </div>
 </div>
@@ -748,16 +746,16 @@ These events are properly interleaved based on time, giving you an accurate pict
 <div class="paragraph">
 <p>Application operators will also enjoy commands like <code>cf logs</code>, but are often interested in long-term retention, indexing, and analysis of logs as well.
 Cloud Foundry currently only provides short-term retention of logs.
-To meet these needs, Cloud Foundry provides the ability to <a href="http://docs.cloudfoundry.org/devguide/services/log-management.html">drain logs to third-party providers.</a></p>
+To meet these needs, Cloud Foundry provides the ability to <a href="http://docs.pivotal.io/pivotalcf/devguide/services/log-management.html">drain logs to third-party providers.</a></p>
 </div>
 <div class="paragraph">
 <p>In this section, we&#8217;ll drain logs to a very simple provider called <a href="https://papertrailapp.com">Papertrail</a>.
-You can set up a third party log management service based on the instructions <a href="https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">here.</a></p>
+You can set up a third party log management service based on the instructions <a href="http://docs.pivotal.io/pivotalcf/devguide/services/log-management-thirdparty-svc.html">here.</a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>For this, lab, we will use a Cloud Foundry <a href="http://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a> to create the log drain for our application using the URL + Port provided by Papertrail.</p>
+<p>For this, lab, we will use a Cloud Foundry <a href="http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html">user-provided service instance</a> to create the log drain for our application using the URL + Port provided by Papertrail.</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ cf cups guestbook-logs -l syslog://logs3.papertrailapp.com:51203
@@ -791,7 +789,7 @@ TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect<
 </ol>
 </div>
 <div class="paragraph">
-<p>You can see how to connect to other third-party log management systems in the <a href="http://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">Cloud Foundry documentation</a>.</p>
+<p>You can see how to connect to other third-party log management systems in the <a href="http://docs.pivotal.io/pivotalcf/devguide/services/log-management-thirdparty-svc.html">Cloud Foundry documentation</a>.</p>
 </div>
 </div>
 </div>
@@ -800,7 +798,7 @@ TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect<
 <h2 id="_health">Health</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloud Foundry&#8217;s <a href="http://docs.cloudfoundry.org/concepts/architecture/#hm9k">Heatlh Manager</a> actively monitors the health of our application processes and will restart them should they crash.</p>
+<p>Cloud Foundry&#8217;s Heatlh Manager actively monitors the health of our application processes and will restart them should they crash.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -816,7 +814,7 @@ TIP: Use 'cf restage guestbook' to ensure your env variable changes take effect<
 <p>Visit the application in the browser, and click on the ``Kill App’’ button. This button will trigger a JVM exit with an error code (<code>System.exit(1)</code>), causing the Health Manager to observe an application instance crash:</p>
 <div class="imageblock">
 <div class="content">
-<img src="Common/images/Guestbook_scale_kill.png" alt="Guestbook scale kill">
+<img src="Common/images/Guestbook_kill.png" alt="Guestbook scale kill">
 </div>
 </div>
 </li>
@@ -896,10 +894,10 @@ time                          event                 actor                  descr
 </div>
 </li>
 <li>
-<p>Revisiting the <strong>HOME PAGE</strong> of the application (don&#8217;t simply refresh the browser as you&#8217;re still on the <code>/killApp</code> endpoint and you&#8217;ll just kill the application again!) and you should see a fresh instance started:</p>
+<p>Revisiting the <strong>HOME PAGE</strong> of the application and you should see a fresh instance started:</p>
 <div class="imageblock">
 <div class="content">
-<img src="Common/images/Guestbook_healed.png" alt="Guestbook healed">
+<img src="Common/images/Guestbook_healed_new.png" alt="Guestbook healed">
 </div>
 </div>
 </li>
